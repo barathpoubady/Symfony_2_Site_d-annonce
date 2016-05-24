@@ -1,0 +1,88 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% for annonce in annonces %}
+    <!--/stories-->
+   <div class="row">    
+     <br>
+     <div class="col-md-2 col-sm-3 text-center">
+        {% for user in users %}
+           {% if annonce.user == user %} 
+            <a class="story-title" href="#"><img alt="" src="{{ asset(user.avatar) }}" style="width:100px;height:100px" class="img-circle"></a>
+           {% endif %} 
+        {% endfor %} 
+     </div>
+     <div class="col-md-10 col-sm-9">
+          
+      
+       <div class="row">
+         <div class="col-xs-6">
+         <div class="thumbnail"> 
+            <div class="row">
+             <div class="col-xs-6">
+             {% for annoncePhoto in annoncePhotos %}
+               {% if annonce == annoncePhoto.annonce %} 
+                <a class="story-title" href="#"><img alt="" src="{{ asset(annoncePhoto.filePhoto) }}" style="width:100%; padding:10px;" /></a>
+               {% endif %} 
+            {% endfor %} 
+             </div>
+           <div class="col-xs-6" >
+            <h3>{{ annonce.titre }}</h3>
+             {% for typeAnnonce in typeAnnonces %}
+               {% if annonce.annonceType == typeAnnonce %} 
+             <h4><span class="label label-default">{{ typeAnnonce.nom }}</span></h4>
+                {% endif %} 
+            {% endfor %} 
+             
+             </div>
+            <div class="col-xs-12" style="padding-top: 10px;">
+               <div class="well" style="margin: 10px;">
+                <h4>
+                    <strong><u>Lieu</u></strong>  
+                    <h5>
+                        {{ annonce.adresse }}<br/>
+                        {{ annonce.ville }} - {{ annonce.cp }}<br/>
+                    </h5>
+                   <small style="font-family:courier,'new courier';" class="text-muted">Crée le :{{ annonce.created | date("d/m/Y") }}
+                    <br/> Modifié le : {{ annonce.updated | date("d/m/Y") }}</small>
+                    
+                </h4>
+             </div>  
+            </div>
+            
+             </div>
+         </div>
+         </div>
+           <div class="col-xs-5">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.nbrPlace }}</span>
+                  Nombre de place total
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.dateDebut | date("d/m/Y")  }}</span>
+                  Date début
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.dateFin | date("d/m/Y")  }}</span>
+                  Date de fin
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ path('site.annonce', {'id_annonce':annonce.id} ) }}"><button type="button" class="btn btn-primary">Voir cette annonce </button></a>
+                </i>
+              </ul> 
+            </div>
+       </div>
+       <br><br>
+     </div>
+   </div>
+   <hr>
+   {% endfor %}
+    
+    
+    <div align="center"><img src="{{ asset("symfony2.png")}}" style="width:200px" alt="image_symfony2"></div>
+    
+{% endblock %}
+
+

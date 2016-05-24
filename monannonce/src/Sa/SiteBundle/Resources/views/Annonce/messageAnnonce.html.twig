@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    
+    {% for flashMessage in app.session.flashbag.get('notice2') %}
+        <p class="bg-danger">
+            {{ flashMessage }}
+        </p>
+    {% endfor %}
+    
+    
+<h1> Envoyé un message : </h1>
+<br/>
+{% form_theme form 'SaSiteBundle:Form:fields.html.twig' %}
+
+{{ form_start(form, { 'attr' : { 'class' : 'form-horizontal' } } ) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.message) }}
+
+{{ form_end(form) }}
+
+{% endblock %}
+
+

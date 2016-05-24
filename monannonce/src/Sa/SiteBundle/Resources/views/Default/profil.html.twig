@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+   {% for profil in profils %}
+     <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ profil.prenom }} {{ profil.nom }}</h3>
+      </div>
+      <div class="row">   
+        <div class="panel-body col-xs-2">
+          ID : {{ profil.username }}
+        </div>
+        <div class="panel-body col-xs-2">
+          MDP : {{ profil.password }}
+        </div>
+        <div class="panel-body col-xs-3">
+          EMAIL : {{ profil.email }}
+        </div>
+        <div class="panel-body col-xs-3">
+          CODE POSTAL : {{ profil.cp }}
+        </div>
+        <div class="panel-body col-xs-3">
+          VILLE : {{ profil.ville }}
+        </div>
+        <div class="panel-body col-xs-3">
+          DATE D'INSCRIPTION : {{ profil.created | date("d/m/Y") }}
+        </div>
+        <div class="panel-body col-xs-3">
+          DATE DE MAJ : 
+        </div>
+      </div>
+    </div>
+  {% endfor %}   
+{% endblock %} 

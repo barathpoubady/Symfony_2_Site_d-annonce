@@ -1,0 +1,100 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    
+    
+<table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Nb place</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>CP</th>
+                <th>Date debut</th>
+                <th>Date fin</th>
+                <th>Création</th>
+                <th>Modifer</th>
+                <th>Etat</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for annonce in annonces %}
+                    {% for user in users %}
+                       {% if annonce.user == user %} 
+                          {% if annonce.isActive == 1 %} 
+                           <tr class="success">
+                                <td>{{ annonce.id }}</td>
+                                <td>{{ annonce.titre }}</td>
+                                <td>{{ annonce.description }}</td>
+                                <td>{{ annonce.nbrPlace }}</td>
+                                <td>{{ annonce.adresse }}</td>
+                                <td>{{ annonce.ville }}</td>
+                                <td>{{ annonce.cp }}</td>
+                                <td>{{ annonce.dateDebut | date("d/m/Y") }}</td>
+                                <td>{{ annonce.dateFin | date("d/m/Y") }}</td>
+                                <td>{{ annonce.created | date("d/m/Y") }}</td>
+                                <td>{{ annonce.updated | date("d/m/Y") }}</td>
+                                <td><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></td>
+                            </tr> 
+                          {% endif %}
+                          {% if annonce.isActive == 0 %} 
+                           <tr class="danger">
+                                <td>{{ annonce.id }}</td>
+                                <td>{{ annonce.titre }}</td>
+                                <td>{{ annonce.description }}</td>
+                                <td>{{ annonce.nbrPlace }}</td>
+                                <td>{{ annonce.adresse }}</td>
+                                <td>{{ annonce.ville }}</td>
+                                <td>{{ annonce.cp }}</td>
+                                <td>{{ annonce.dateDebut | date("d/m/Y") }}</td>
+                                <td>{{ annonce.dateFin | date("d/m/Y") }}</td>
+                                <td>{{ annonce.created | date("d/m/Y") }}</td>
+                                <td>{{ annonce.updated | date("d/m/Y") }}</td>
+                                <td><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td>
+                            </tr>
+                          {% endif %} 
+                       {% endif %} 
+                    {% endfor %} 
+            {% endfor %}  
+            
+            
+           <!--<tr class="active">
+                <td>1</td>
+                <td>Credit Card</td>
+                <td>04/07/2014</td>
+                <td>Call in to confirm</td>
+            </tr>
+            <tr class="success">
+                <td>2</td>
+                <td>Water</td>
+                <td>01/07/2014</td>
+                <td>Paid</td>
+            </tr>
+            <tr class="info">
+                <td>3</td>
+                <td>Internet</td>
+                <td>05/07/2014</td>
+                <td>Change plan</td>
+            </tr>
+            <tr class="warning">
+                <td>4</td>
+                <td>Electricity</td>
+                <td>03/07/2014</td>
+                <td>Pending</td>
+            </tr>
+            <tr class="danger">
+                <td>5</td>
+                <td>Telephone</td>
+                <td>06/07/2014</td>
+                <td>Due</td>
+            </tr>-->
+
+        </tbody>
+    </table>
+    
+    
+{% endblock body %}

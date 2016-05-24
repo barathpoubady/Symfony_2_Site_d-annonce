@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MessageAnnonce" table="message_annonce">
+    <indexes>
+      <index name="fk_discussion_message_user1_idx" columns="user_id"/>
+      <index name="fk_discussion_message_annonce1_idx" columns="annonce_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="message" type="string" column="message" length="255" nullable="true"/>
+    <field name="created" type="datetime" column="created" nullable="true"/>
+    <field name="updated" type="datetime" column="updated" nullable="true"/>
+    <many-to-one field="annonce" target-entity="Annonce">
+      <join-columns>
+        <join-column name="annonce_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="User">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

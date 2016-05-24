@@ -1,0 +1,117 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <p class="bg-danger">
+            {{ flashMessage }}
+        </p>
+    {% endfor %}
+
+    {% for annonce in annonces %}
+    <!--/stories-->
+   <div class="row">    
+     <br>
+     <div class="col-md-2 col-sm-3 text-center">
+        {% for user in users %}
+           {% if annonce.user == user %} 
+            <a class="story-title" href="#"><img alt="" src="{{ asset(user.avatar) }}" style="width:100px;height:100px" class="img-circle"></a>
+           {% endif %} 
+        {% endfor %} 
+     </div>
+     <div class="col-md-10 col-sm-9">
+          
+      
+       
+       <br><br>
+     </div>
+   </div>
+   <hr>
+
+    <div id="map-canvas"></div>
+<div class="container-fluid" id="main">
+  <div class="row">
+    <div class="col-xs-8" id="left">
+        <div class="row">
+         <div class="col-xs-7">
+         <div class="thumbnail"> 
+            <div class="row">
+             <div class="col-xs-6">
+             {% for annoncePhoto in annoncePhotos %}
+               {% if annonce == annoncePhoto.annonce %} 
+                <a class="story-title" href="#"><img alt="" src="{{ asset(annoncePhoto.filePhoto) }}" style="width:100%; padding:10px;" /></a>
+               {% endif %} 
+            {% endfor %} 
+             </div>
+           <div class="col-xs-6" >
+            <h3>{{ annonce.titre }}</h3>
+             {% for typeAnnonce in typeAnnonces %}
+               {% if annonce.annonceType == typeAnnonce %} 
+             <h4><span class="label label-default">{{ typeAnnonce.nom }}</span></h4>
+                {% endif %} 
+            {% endfor %} 
+             
+             </div>
+            <div class="col-xs-12" style="padding-top: 10px;">
+               <div class="well" style="margin: 10px;">
+                <h4>
+                    <strong><u>Lieu</u></strong>  
+                    <h5>
+                        {{ annonce.adresse }}<br/>
+                        {{ annonce.ville }} - {{ annonce.cp }}<br/>
+                    </h5>
+                   <small style="font-family:courier,'new courier';" class="text-muted">Crée le :{{ annonce.created | date("d/m/Y") }}
+                    <br/> Modifié le : {{ annonce.updated | date("d/m/Y") }}</small>
+                    <br/> <br/>
+                   <strong><u>Description</u></strong> <br/>
+                   <h5> {{ annonce.description }}</h5>
+                </h4>
+             </div>  
+            </div>
+            
+             </div>
+         </div>
+         </div>
+           <div class="col-xs-5">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.nbrPlace }}</span>
+                  Nombre de place total
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.nbrPlace }}</span>
+                  Nombre de place restant
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.dateDebut | date("d/m/Y")  }}</span>
+                  Date début
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">{{ annonce.dateFin | date("d/m/Y")  }}</span>
+                  Date de fin
+                </li>
+                <li class="list-group-item">
+                  <a href="{{ path('site.participe', {'id_annonce':annonce.id} ) }}"><button type="button" class="btn btn-primary">Participer </button></a>
+                </i>
+                <li class="list-group-item">
+                  <a href="{{ path('site.messageAnnonce', {'id_annonce':annonce.id} ) }}"><button type="button" class="btn btn-warning">Envoyer un message à l'éditeur </button></a>
+                </i>
+                
+              </ul> 
+            </div>
+       </div>
+
+
+    </div>
+    <div class="col-xs-4"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d42019.39508404667!2d2.41718475!3d48.83509110000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1416558076378" width="100%" height="500px" frameborder="0" style="border:0"></iframe></div>
+    
+  </div>
+</div>
+    
+      {% endfor %}
+      
+        <div align="center"><img src="{{ asset("symfony2.png")}}" style="width:200px" alt="image_symfony2"></div>
+      
+{% endblock %}
+
+

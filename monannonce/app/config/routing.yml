@@ -1,0 +1,4 @@
+sa_site:
+    resource: "@SaSiteBundle/Controller/"
+    type:     annotation
+    prefix:   /

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Annonce" table="annonce">
+    <indexes>
+      <index name="fk_annonce_user_idx" columns="user_id"/>
+      <index name="fk_annonce_annonce_type1_idx" columns="annonce_type_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="titre" type="string" column="titre" length="255" nullable="true"/>
+    <field name="description" type="string" column="description" length="255" nullable="true"/>
+    <field name="nbrPlace" type="integer" column="nbr_place" nullable="true"/>
+    <field name="isActive" type="boolean" column="is_active" nullable="false"/>
+    <field name="isRefuser" type="boolean" column="is_refuser" nullable="false"/>
+    <field name="adresse" type="string" column="adresse" length="255" nullable="true"/>
+    <field name="ville" type="string" column="ville" length="255" nullable="true"/>
+    <field name="cp" type="string" column="cp" length="255" nullable="true"/>
+    <field name="dateDebut" type="datetime" column="date_debut" nullable="true"/>
+    <field name="dateFin" type="datetime" column="date_fin" nullable="true"/>
+    <field name="updated" type="datetime" column="updated" nullable="true"/>
+    <field name="created" type="datetime" column="created" nullable="true"/>
+    <many-to-one field="annonceType" target-entity="AnnonceType">
+      <join-columns>
+        <join-column name="annonce_type_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="User">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

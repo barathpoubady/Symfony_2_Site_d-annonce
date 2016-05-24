@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1> Ajoutée une annonce : </h1>
+<br/>
+{% form_theme form 'SaSiteBundle:Form:fields.html.twig' %}
+
+{{ form_start(form, { 'attr' : { 'class' : 'form-horizontal' } } ) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.titre) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.ville) }}
+    {{ form_row(form.cp) }}
+    {{ form_row(form.date_debut) }}
+    {{ form_row(form.date_fin) }}
+
+{{ form_end(form) }}
+
+{% endblock %}
